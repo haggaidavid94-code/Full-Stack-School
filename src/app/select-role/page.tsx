@@ -62,7 +62,7 @@ const SelectRolePage = () => {
       });
       
       console.log("Role saved successfully:", role);
-      console.log("Updated privateMetadata:", user.privateMetadata);
+      console.log("Updated privateMetadata:", (user as any).privateMetadata);
       
       // Wait a moment for the update to propagate
       setTimeout(() => {
