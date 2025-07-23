@@ -16,7 +16,8 @@ const EventListPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
 
-  const { userId, sessionClaims } = auth();
+  // For now, assume admin role without authentication
+  const userId = "admin-user-id";
   const role = "admin";
   const currentUserId = userId;
 
