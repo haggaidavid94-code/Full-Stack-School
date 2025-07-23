@@ -24,7 +24,7 @@ const AssignmentListPage = async ({
 
   // For now, assume admin role without authentication
   const userId = "admin-user-id";
-  const role = "admin";
+  const role = "admin" as string;
   const currentUserId = userId;
   
   

@@ -16,7 +16,7 @@ const SingleTeacherPage = async ({
   params: { id: string };
 }) => {
   // For now, assume admin role without authentication
-  const role = "admin";
+  const role = "admin" as string;
 
   const teacher:
     | (Teacher & {

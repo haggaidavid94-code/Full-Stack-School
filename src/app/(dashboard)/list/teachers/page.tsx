@@ -17,7 +17,7 @@ const TeacherListPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
   // For now, assume admin role without authentication
-  const role = "admin";
+  const role = "admin" as string;
   const columns = [
     {
       header: "Info",
