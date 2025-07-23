@@ -14,10 +14,10 @@ const StudentPage = () => {
 
   useEffect(() => {
     if (isLoaded && user) {
-      const userRole = (user as any).privateMetadata?.role;
+      const userRole = (user as any).unsafeMetadata?.role;
       
       console.log("StudentPage - User ID:", user.id);
-      console.log("StudentPage - privateMetadata:", (user as any).privateMetadata);
+      console.log("StudentPage - unsafeMetadata:", (user as any).unsafeMetadata);
       console.log("StudentPage - userRole:", userRole);
       
       // Check if user has a role assigned
@@ -62,7 +62,7 @@ const StudentPage = () => {
   }
 
   // Show loading while role is being verified
-  if (!(user as any).privateMetadata?.role) {
+  if (!(user as any).unsafeMetadata?.role) {
     return (
       <div className="h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
