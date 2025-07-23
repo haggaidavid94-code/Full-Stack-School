@@ -1,20 +1,9 @@
 "use client";
 
-import * as Clerk from "@clerk/elements/common";
-import * as SignIn from "@clerk/elements/sign-in";
-import * as SignUp from "@clerk/elements/sign-up";
-import { useUser } from "@clerk/nextjs";
-import Image from "next/image";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import ErrorBoundary from "@/components/ErrorBoundary";
-import RoleSelection from "@/components/RoleSelection";
 
-const LoginPage = () => {
-  const { isLoaded, isSignedIn, user } = useUser();
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [showRoleSelection, setShowRoleSelection] = useState(false);
-  const [showHomePage, setShowHomePage] = useState(false);
+const HomePage = () => {
   const router = useRouter();
 
   useEffect(() => {
