@@ -53,10 +53,10 @@ const SelectRolePage = () => {
     setSelectedRole(role);
     
     try {
-      // Update user's private metadata with the selected role
+      // Update user's private metadata with the selected role using unsafeMetadata
       await user.update({
-        privateMetadata: {
-          ...user.privateMetadata,
+        unsafeMetadata: {
+          ...user.unsafeMetadata,
           role: role
         }
       });
