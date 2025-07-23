@@ -42,6 +42,12 @@ const RoleSelection = () => {
   ];
 
   const handleRoleSelect = (role: string) => {
+    // Validate role before proceeding
+    if (!role || !['admin', 'teacher', 'student', 'parent'].includes(role)) {
+      console.error('Invalid role selected:', role);
+      return;
+    }
+    
     setIsLoading(true);
     
     // Store role in localStorage 
@@ -49,7 +55,7 @@ const RoleSelection = () => {
       localStorage.setItem('userRole', role);
     }
     
-    // Simple redirect
+    // Simple redirect with validation
     window.location.href = `/${role}`;
   };
 
