@@ -10,6 +10,14 @@ const RoleSelection = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log("RoleSelection - Current user:", user?.id);
+  console.log("RoleSelection - Current privateMetadata:", user?.privateMetadata);
+
+  // Clear localStorage on component mount to prevent conflicts
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('userRole');
+  }
+
   const roles = [
     {
       id: "admin",
@@ -50,13 +58,9 @@ const RoleSelection = () => {
     
     setIsLoading(true);
     
-    // Store role in localStorage 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('userRole', role);
-    }
-    
-    // Simple redirect with validation
-    window.location.href = `/${role}`;
+    // Simply redirect - the dashboard pages will handle role checking
+    console.log("RoleSelection - Redirecting to:", `/${role}`);
+    router.push(`/${role}`);
   };
 
   return (
@@ -103,7 +107,7 @@ const RoleSelection = () => {
 
         <div className="text-center mt-6">
           <button
-            onClick={() => window.location.href = '/admin'}
+            onClick={() => router.push('/admin')}
             className="text-sm text-gray-500 hover:text-gray-700 underline"
           >
             Skip - Go to Admin Dashboard
