@@ -20,7 +20,7 @@ const AdminPage = ({
 
   useEffect(() => {
     if (isLoaded && user) {
-      const userRole = user.privateMetadata?.role;
+      const userRole = (user as any).privateMetadata?.role;
       
       console.log("AdminPage - User ID:", user.id);
       console.log("AdminPage - privateMetadata:", user.privateMetadata);
