@@ -305,6 +305,32 @@ const LoginPage = () => {
               </SignUp.Action>
             </SignUp.Strategy>
           </SignUp.Step>
+
+          <SignUp.Step
+            name="continue"
+            className="bg-white p-12 rounded-md shadow-2xl flex flex-col gap-2"
+          >
+            <h1 className="text-xl font-bold flex items-center gap-2">
+              <Image src="/logo.png" alt="" width={24} height={24} />
+              SchooLama
+            </h1>
+            <h2 className="text-gray-400">Account Created Successfully!</h2>
+            <p className="text-sm text-gray-500 mb-4">
+              Your account has been verified. You will be redirected shortly.
+            </p>
+            
+            <div className="flex items-center justify-center py-4">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500"></div>
+              <span className="ml-2 text-sm text-gray-600">Redirecting...</span>
+            </div>
+            
+            <button
+              onClick={() => router.push('/select-role')}
+              className="bg-blue-500 text-white my-1 rounded-md text-sm p-[10px]"
+            >
+              Continue to Role Selection
+            </button>
+          </SignUp.Step>
         </SignUp.Root>
       )}
     </div>
