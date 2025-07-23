@@ -18,17 +18,20 @@ const LoginPage = () => {
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
       // Check for role in publicMetadata first, then localStorage
-      const role = user?.publicMetadata?.role || localStorage.getItem('userRole');
+      const publicRole = user?.publicMetadata?.role;
+      const storageRole = typeof window !== 'undefined' ? localStorage.getItem('userRole') : null;
+      const role = publicRole || storageRole;
 
       if (role) {
         // Use window.location for more reliable redirect
         window.location.href = `/${role}`;
+        return;
       } else {
         // User is signed in but has no role - show role selection
         setShowRoleSelection(true);
       }
     }
-  }, [user, router, isLoaded, isSignedIn]);
+  }, [user, isLoaded, isSignedIn]);
 
   // Show role selection if user is signed in but has no role
   if (showRoleSelection && isSignedIn) {
