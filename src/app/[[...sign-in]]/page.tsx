@@ -24,37 +24,32 @@ const LoginPage = () => {
       if (storedRole === 'undefined' || storedRole === 'null') {
         localStorage.removeItem('userRole');
       }
+      // Clear all localStorage role data - we'll rely on Clerk privateMetadata only
+      localStorage.removeItem('userRole');
     }
 
     if (isLoaded && isSignedIn && user) {
-      // Check for role in publicMetadata first, then localStorage
-      const publicRole = user?.publicMetadata?.role;
-      const storageRole = typeof window !== 'undefined' ? localStorage.getItem('userRole') : null;
+      // Only check privateMetadata - ignore localStorage
+      const userRole = user.privateMetadata?.role;
       
-      // Make sure we have a valid role (not undefined, null, or "undefined" string)
-      const role = publicRole && publicRole !== 'undefined' && publicRole !== 'null' 
-        ? publicRole 
-        : storageRole && storageRole !== 'undefined' && storageRole !== 'null' 
-        ? storageRole 
-        : null;
-
-      if (role && typeof role === 'string' && ['admin', 'teacher', 'student', 'parent'].includes(role)) {
-        // Only redirect if we have a valid role
-        window.location.href = `/${role}`;
+      console.log("LoginPage - User ID:", user.id);
+      console.log("LoginPage - privateMetadata:", user.privateMetadata);
+      console.log("LoginPage - userRole:", userRole);
+      
+      // Make sure we have a valid role from Clerk privateMetadata
+      if (userRole && typeof userRole === 'string' && ['admin', 'teacher', 'student', 'parent'].includes(userRole)) {
+        // Only redirect if we have a valid role in privateMetadata
+        console.log("LoginPage - Valid role found in privateMetadata, redirecting to", `/${userRole}`);
+        window.location.href = `/${userRole}`;
         return;
       } else {
-        // Clean up any bad values
-        if (typeof window !== 'undefined') {
-          const badRole = localStorage.getItem('userRole');
-          if (badRole === 'undefined' || badRole === 'null') {
-            localStorage.removeItem('userRole');
-          }
-        }
-        // User is signed in but has no valid role - show role selection
+        // User is signed in but has no valid role in privateMetadata - show role selection
+        console.log("LoginPage - No valid role in privateMetadata, showing role selection");
         setShowRoleSelection(true);
       }
     } else if (isLoaded && !isSignedIn) {
-      // User is not signed in - could show home page or login
+      // User is not signed in - show home page or login
+      console.log("LoginPage - User not signed in, showing home page");
       setShowHomePage(true);
     }
   }, [user, isLoaded, isSignedIn]);
