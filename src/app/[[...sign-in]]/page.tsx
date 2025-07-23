@@ -24,27 +24,27 @@ const LoginPage = () => {
       if (storedRole === 'undefined' || storedRole === 'null') {
         localStorage.removeItem('userRole');
       }
-      // Clear all localStorage role data - we'll rely on Clerk privateMetadata only
+      // Clear all localStorage role data - we'll rely on Clerk unsafeMetadata only
       localStorage.removeItem('userRole');
     }
 
     if (isLoaded && isSignedIn && user) {
-      // Only check privateMetadata - ignore localStorage
-      const userRole = (user as any).privateMetadata?.role;
+      // Only check unsafeMetadata - ignore localStorage
+      const userRole = (user as any).unsafeMetadata?.role;
       
       console.log("LoginPage - User ID:", user.id);
-      console.log("LoginPage - privateMetadata:", (user as any).privateMetadata);
+      console.log("LoginPage - unsafeMetadata:", (user as any).unsafeMetadata);
       console.log("LoginPage - userRole:", userRole);
       
-      // Make sure we have a valid role from Clerk privateMetadata
+      // Make sure we have a valid role from Clerk unsafeMetadata
       if (userRole && typeof userRole === 'string' && ['admin', 'teacher', 'student', 'parent'].includes(userRole)) {
-        // Only redirect if we have a valid role in privateMetadata
-        console.log("LoginPage - Valid role found in privateMetadata, redirecting to", `/${userRole}`);
+        // Only redirect if we have a valid role in unsafeMetadata
+        console.log("LoginPage - Valid role found in unsafeMetadata, redirecting to", `/${userRole}`);
         window.location.href = `/${userRole}`;
         return;
       } else {
-        // User is signed in but has no valid role in privateMetadata - show role selection
-        console.log("LoginPage - No valid role in privateMetadata, showing role selection");
+        // User is signed in but has no valid role in unsafeMetadata - show role selection
+        console.log("LoginPage - No valid role in unsafeMetadata, showing role selection");
         setShowRoleSelection(true);
       }
     } else if (isLoaded && !isSignedIn) {
