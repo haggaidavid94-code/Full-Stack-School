@@ -8,7 +8,6 @@ import Image from "next/image";
 const RoleSelection = () => {
   const { user } = useUser();
   const router = useRouter();
-  const [selectedRole, setSelectedRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const roles = [
@@ -45,27 +44,13 @@ const RoleSelection = () => {
   const handleRoleSelect = (role: string) => {
     setIsLoading(true);
     
-    try {
-      // Store role in localStorage 
+    // Store role in localStorage 
+    if (typeof window !== 'undefined') {
       localStorage.setItem('userRole', role);
-      
-      // Add a small delay to ensure localStorage is set, then redirect
-      setTimeout(() => {
-        window.location.href = `/${role}`;
-      }, 500);
-      
-      // Fallback: If redirect doesn't work within 3 seconds, try again
-      setTimeout(() => {
-        if (window.location.pathname === '/') {
-          window.location.href = `/${role}`;
-        }
-      }, 3000);
-      
-    } catch (error) {
-      console.error("Error setting role:", error);
-      setIsLoading(false);
-      alert("There was an error setting your role. Please try again.");
     }
+    
+    // Simple redirect
+    window.location.href = `/${role}`;
   };
 
   return (
@@ -73,7 +58,7 @@ const RoleSelection = () => {
       <div className="bg-white p-8 rounded-lg shadow-2xl max-w-2xl w-full">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Image src="/logo.png" alt="" width={32} height={32} />
+            <Image src="/logo.png" alt="Logo" width={32} height={32} />
             <h1 className="text-2xl font-bold">SchooLama</h1>
           </div>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
@@ -105,24 +90,19 @@ const RoleSelection = () => {
           <div className="text-center mt-6">
             <div className="inline-flex items-center">
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500 mr-2"></div>
-              Setting up your account...
+              Redirecting...
             </div>
-            <p className="text-sm text-gray-500 mt-2">
-              This should only take a moment
-            </p>
           </div>
         )}
 
-        {!isLoading && (
-          <div className="text-center mt-6">
-            <button
-              onClick={() => window.location.href = '/admin'}
-              className="text-sm text-gray-500 hover:text-gray-700 underline"
-            >
-              Skip for now (go to Admin dashboard)
-            </button>
-          </div>
-        )}
+        <div className="text-center mt-6">
+          <button
+            onClick={() => window.location.href = '/admin'}
+            className="text-sm text-gray-500 hover:text-gray-700 underline"
+          >
+            Skip - Go to Admin Dashboard
+          </button>
+        </div>
       </div>
     </div>
   );
