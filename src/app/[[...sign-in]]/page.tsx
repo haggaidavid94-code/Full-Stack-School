@@ -21,14 +21,27 @@ const LoginPage = () => {
       // Check for role in publicMetadata first, then localStorage
       const publicRole = user?.publicMetadata?.role;
       const storageRole = typeof window !== 'undefined' ? localStorage.getItem('userRole') : null;
-      const role = publicRole || storageRole;
+      
+      // Make sure we have a valid role (not undefined, null, or "undefined" string)
+      const role = publicRole && publicRole !== 'undefined' && publicRole !== 'null' 
+        ? publicRole 
+        : storageRole && storageRole !== 'undefined' && storageRole !== 'null' 
+        ? storageRole 
+        : null;
 
-      if (role) {
-        // Use window.location for more reliable redirect
+      if (role && ['admin', 'teacher', 'student', 'parent'].includes(role)) {
+        // Only redirect if we have a valid role
         window.location.href = `/${role}`;
         return;
       } else {
-        // User is signed in but has no role - show role selection
+        // Clean up any bad values
+        if (typeof window !== 'undefined') {
+          const badRole = localStorage.getItem('userRole');
+          if (badRole === 'undefined' || badRole === 'null') {
+            localStorage.removeItem('userRole');
+          }
+        }
+        // User is signed in but has no valid role - show role selection
         setShowRoleSelection(true);
       }
     }
