@@ -17,7 +17,7 @@ const StudentPage = () => {
       const userRole = user.privateMetadata?.role;
       
       console.log("StudentPage - User ID:", user.id);
-      console.log("StudentPage - privateMetadata:", user.privateMetadata);
+      console.log("StudentPage - privateMetadata:", (user as any).privateMetadata);
       console.log("StudentPage - userRole:", userRole);
       
       // Check if user has a role assigned
