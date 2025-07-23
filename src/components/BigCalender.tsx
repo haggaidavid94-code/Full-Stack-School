@@ -21,7 +21,7 @@ const BigCalendar = ({
   };
 
   return (
-    <Calendar
+    <Calendar as any
       localizer={localizer}
       events={data}
       startAccessor="start"
