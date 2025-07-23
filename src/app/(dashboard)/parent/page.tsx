@@ -13,10 +13,10 @@ const ParentPage = () => {
 
   useEffect(() => {
     if (isLoaded && user) {
-      const userRole = user.privateMetadata?.role;
+      const userRole = (user as any).privateMetadata?.role;
       
       console.log("ParentPage - User ID:", user.id);
-      console.log("ParentPage - privateMetadata:", user.privateMetadata);
+      console.log("ParentPage - privateMetadata:", (user as any).privateMetadata);
       console.log("ParentPage - userRole:", userRole);
       
       // Check if user has a role assigned
