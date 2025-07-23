@@ -15,7 +15,7 @@ const SubjectListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  const { sessionClaims } = auth();
+  // For now, assume admin role without authentication
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   const columns = [
