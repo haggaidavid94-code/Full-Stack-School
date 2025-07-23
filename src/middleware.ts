@@ -10,15 +10,23 @@ const matchers = Object.keys(routeAccessMap).map((route) => ({
 console.log(matchers);
 
 export default clerkMiddleware((auth, req) => {
-  // if (isProtectedRoute(req)) auth().protect()
+  // Prevent undefined routes
+  if (req.nextUrl.pathname === '/undefined' || req.nextUrl.pathname === '/null') {
+    return NextResponse.redirect(new URL('/', req.url));
+  }
 
   const { sessionClaims } = auth();
-
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   for (const { matcher, allowedRoles } of matchers) {
     if (matcher(req) && !allowedRoles.includes(role!)) {
-      return NextResponse.redirect(new URL(`/${role}`, req.url));
+      // Only redirect if role is valid
+      if (role && ['admin', 'teacher', 'student', 'parent'].includes(role)) {
+        return NextResponse.redirect(new URL(`/${role}`, req.url));
+      } else {
+        // Redirect to home if no valid role
+        return NextResponse.redirect(new URL('/', req.url));
+      }
     }
   }
 });
