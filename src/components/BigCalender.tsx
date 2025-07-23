@@ -1,8 +1,6 @@
 "use client";
 
 import { Calendar, momentLocalizer, View, Views } from "react-big-calendar";
-// @ts-ignore
-import type { CalendarProps } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState } from "react";
@@ -20,8 +18,10 @@ const BigCalendar = ({
     setView(selectedView);
   };
 
+  const CalendarComponent = Calendar as any;
+
   return (
-    <Calendar as any
+    <CalendarComponent
       localizer={localizer}
       events={data}
       startAccessor="start"
