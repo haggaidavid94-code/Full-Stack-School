@@ -23,7 +23,7 @@ const AdminPage = ({
       const userRole = (user as any).privateMetadata?.role;
       
       console.log("AdminPage - User ID:", user.id);
-      console.log("AdminPage - privateMetadata:", user.privateMetadata);
+      console.log("AdminPage - privateMetadata:", (user as any).privateMetadata);
       console.log("AdminPage - userRole:", userRole);
       
       // Check if user has a role assigned
