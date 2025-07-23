@@ -12,10 +12,10 @@ const TeacherPage = () => {
 
   useEffect(() => {
     if (isLoaded && user) {
-      const userRole = user.privateMetadata?.role;
+      const userRole = (user as any).privateMetadata?.role;
       
       console.log("TeacherPage - User ID:", user.id);
-      console.log("TeacherPage - privateMetadata:", user.privateMetadata);
+      console.log("TeacherPage - privateMetadata:", (user as any).privateMetadata);
       console.log("TeacherPage - userRole:", userRole);
       
       // Check if user has a role assigned
