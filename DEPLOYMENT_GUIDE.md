@@ -26,10 +26,11 @@
 
 ### **1. User Flow:**
 1. User visits app → redirected to sign-in if not authenticated
-2. After sign-up/sign-in → redirected to `/select-role` if no role assigned
-3. User selects role → saved to Clerk's `unsafeMetadata.role`
-4. User redirected to appropriate dashboard based on role
-5. Dashboard checks role and allows/denies access accordingly
+2. After sign-up/sign-in → **redirected to `/continue` page** (no more blank screen)
+3. Continue page checks role → redirects to `/select-role` if no role assigned
+4. User selects role → saved to Clerk's `unsafeMetadata.role`
+5. User redirected to appropriate dashboard based on role
+6. Dashboard checks role and allows/denies access accordingly
 
 ### **2. Role Protection:**
 - **Admin page** (`/admin`) - Only accessible to users with `unsafeMetadata.role = "admin"`
