@@ -1,4 +1,3 @@
-import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,7 +8,7 @@ const menuItems = [
       {
         icon: "/home.png",
         label: "Home",
-        href: "/",
+        href: "/admin",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
@@ -117,9 +116,10 @@ const menuItems = [
   },
 ];
 
-const Menu = async () => {
-  const user = await currentUser();
-  const role = user?.publicMetadata.role as string;
+const Menu = () => {
+  // For now, show all admin menu items without authentication
+  const role = "admin";
+  
   return (
     <div className="mt-4 text-sm">
       {menuItems.map((i) => (
