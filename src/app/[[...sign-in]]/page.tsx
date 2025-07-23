@@ -38,7 +38,7 @@ const LoginPage = () => {
         ? storageRole 
         : null;
 
-      if (role && ['admin', 'teacher', 'student', 'parent'].includes(role)) {
+      if (role && typeof role === 'string' && ['admin', 'teacher', 'student', 'parent'].includes(role)) {
         // Only redirect if we have a valid role
         window.location.href = `/${role}`;
         return;
