@@ -30,7 +30,7 @@ const LoginPage = () => {
 
     if (isLoaded && isSignedIn && user) {
       // Only check privateMetadata - ignore localStorage
-      const userRole = user.privateMetadata?.role;
+      const userRole = (user as any).privateMetadata?.role;
       
       console.log("LoginPage - User ID:", user.id);
       console.log("LoginPage - privateMetadata:", user.privateMetadata);
