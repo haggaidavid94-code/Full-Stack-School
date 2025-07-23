@@ -7,19 +7,31 @@ import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import RoleSelection from "@/components/RoleSelection";
 
 const LoginPage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [showRoleSelection, setShowRoleSelection] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const role = user?.publicMetadata.role;
+    if (isLoaded && isSignedIn && user) {
+      const role = user?.publicMetadata.role;
 
-    if (role) {
-      router.push(`/${role}`);
+      if (role) {
+        router.push(`/${role}`);
+      } else {
+        // User is signed in but has no role - show role selection
+        setShowRoleSelection(true);
+      }
     }
-  }, [user, router]);
+  }, [user, router, isLoaded, isSignedIn]);
+
+  // Show role selection if user is signed in but has no role
+  if (showRoleSelection && isSignedIn) {
+    return <RoleSelection />;
+  }
 
   return (
     <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
@@ -144,6 +156,9 @@ const LoginPage = () => {
               SchooLama
             </h1>
             <h2 className="text-gray-400">Verify your email</h2>
+            <p className="text-sm text-gray-500 mb-4">
+              We sent a verification code to your email address
+            </p>
             
             <SignUp.Strategy name="email_code">
               <Clerk.Field name="code" className="flex flex-col gap-2">
@@ -154,6 +169,7 @@ const LoginPage = () => {
                   type="text"
                   required
                   className="p-2 rounded-md ring-1 ring-gray-300"
+                  placeholder="Enter 6-digit code"
                 />
                 <Clerk.FieldError className="text-xs text-red-400" />
               </Clerk.Field>
