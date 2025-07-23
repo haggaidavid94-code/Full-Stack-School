@@ -17,7 +17,7 @@ const ClassListPage = async ({
 }) => {
 
 // For now, assume admin role without authentication
-const role = (sessionClaims?.metadata as { role?: string })?.role;
+const role = "admin";
 
 
 const columns = [

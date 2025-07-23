@@ -17,7 +17,7 @@ const AnnouncementListPage = async ({
 }) => {
   
   const { userId, sessionClaims } = auth();
-  const role = (sessionClaims?.metadata as { role?: string })?.role;
+  const role = "admin";
   const currentUserId = userId;
   
   const columns = [
