@@ -17,10 +17,12 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
-      const role = user?.publicMetadata.role || localStorage.getItem('userRole');
+      // Check for role in publicMetadata first, then localStorage
+      const role = user?.publicMetadata?.role || localStorage.getItem('userRole');
 
       if (role) {
-        router.push(`/${role}`);
+        // Use window.location for more reliable redirect
+        window.location.href = `/${role}`;
       } else {
         // User is signed in but has no role - show role selection
         setShowRoleSelection(true);
