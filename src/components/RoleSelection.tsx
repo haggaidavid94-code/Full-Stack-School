@@ -11,7 +11,7 @@ const RoleSelection = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   console.log("RoleSelection - Current user:", user?.id);
-  console.log("RoleSelection - Current privateMetadata:", user?.privateMetadata);
+  console.log("RoleSelection - Current unsafeMetadata:", user?.unsafeMetadata);
 
   // Clear localStorage on component mount to prevent conflicts
   if (typeof window !== 'undefined') {
