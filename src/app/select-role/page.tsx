@@ -12,7 +12,7 @@ const SelectRolePage = () => {
   const [selectedRole, setSelectedRole] = useState("");
 
   console.log("SelectRolePage - Current user:", user?.id);
-  console.log("SelectRolePage - Current privateMetadata:", (user as any)?.privateMetadata);
+  console.log("SelectRolePage - Current unsafeMetadata:", (user as any)?.unsafeMetadata);
 
   const roles = [
     {
