@@ -18,6 +18,14 @@ const LoginPage = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // Clean up any undefined values that might be causing issues
+    if (typeof window !== 'undefined') {
+      const storedRole = localStorage.getItem('userRole');
+      if (storedRole === 'undefined' || storedRole === 'null') {
+        localStorage.removeItem('userRole');
+      }
+    }
+
     if (isLoaded && isSignedIn && user) {
       // Check for role in publicMetadata first, then localStorage
       const publicRole = user?.publicMetadata?.role;
@@ -45,6 +53,9 @@ const LoginPage = () => {
         // User is signed in but has no valid role - show role selection
         setShowRoleSelection(true);
       }
+    } else if (isLoaded && !isSignedIn) {
+      // User is not signed in - could show home page or login
+      setShowHomePage(true);
     }
   }, [user, isLoaded, isSignedIn]);
 
