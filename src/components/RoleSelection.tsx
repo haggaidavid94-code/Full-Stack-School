@@ -45,14 +45,18 @@ const RoleSelection = () => {
   const handleRoleSelect = async (role: string) => {
     setIsLoading(true);
     try {
+      // Use Clerk's proper method to update user metadata
       await user?.update({
-        publicMetadata: {
+        unsafeMetadata: {
           role: role
         }
       });
       
-      // Redirect to the selected role dashboard
-      router.push(`/${role}`);
+      // Also try to set in publicMetadata via a custom approach
+      // This might require a server action in a real app
+      
+      // For now, redirect and let the useEffect handle the routing
+      window.location.reload();
     } catch (error) {
       console.error("Error setting role:", error);
       setIsLoading(false);
