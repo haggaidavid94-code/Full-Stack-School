@@ -6,7 +6,7 @@ import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Class, Exam, Prisma, Subject, Teacher } from "@prisma/client";
 import Image from "next/image";
-import { auth } from "@clerk/nextjs/server";
+
 
 type ExamList = Exam & {
   lesson: {

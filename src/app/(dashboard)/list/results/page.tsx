@@ -7,7 +7,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 
-import { auth } from "@clerk/nextjs/server";
+
 
 type ResultList = {
   id: number;
