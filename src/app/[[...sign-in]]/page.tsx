@@ -33,7 +33,7 @@ const LoginPage = () => {
       const userRole = (user as any).privateMetadata?.role;
       
       console.log("LoginPage - User ID:", user.id);
-      console.log("LoginPage - privateMetadata:", user.privateMetadata);
+      console.log("LoginPage - privateMetadata:", (user as any).privateMetadata);
       console.log("LoginPage - userRole:", userRole);
       
       // Make sure we have a valid role from Clerk privateMetadata
