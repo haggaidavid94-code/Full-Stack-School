@@ -49,14 +49,22 @@ const RoleSelection = () => {
       // Store role in localStorage 
       localStorage.setItem('userRole', role);
       
-      // Add a small delay to ensure localStorage is set
+      // Add a small delay to ensure localStorage is set, then redirect
       setTimeout(() => {
-        // Redirect to the selected role dashboard
         window.location.href = `/${role}`;
       }, 500);
+      
+      // Fallback: If redirect doesn't work within 3 seconds, try again
+      setTimeout(() => {
+        if (window.location.pathname === '/') {
+          window.location.href = `/${role}`;
+        }
+      }, 3000);
+      
     } catch (error) {
       console.error("Error setting role:", error);
       setIsLoading(false);
+      alert("There was an error setting your role. Please try again.");
     }
   };
 
