@@ -45,11 +45,19 @@ const RoleSelection = () => {
   const handleRoleSelect = (role: string) => {
     setIsLoading(true);
     
-    // Store role in localStorage as a temporary solution
-    localStorage.setItem('userRole', role);
-    
-    // Redirect to the selected role dashboard
-    router.push(`/${role}`);
+    try {
+      // Store role in localStorage 
+      localStorage.setItem('userRole', role);
+      
+      // Add a small delay to ensure localStorage is set
+      setTimeout(() => {
+        // Redirect to the selected role dashboard
+        window.location.href = `/${role}`;
+      }, 500);
+    } catch (error) {
+      console.error("Error setting role:", error);
+      setIsLoading(false);
+    }
   };
 
   return (
