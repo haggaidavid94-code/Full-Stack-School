@@ -14,6 +14,7 @@ const LoginPage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showRoleSelection, setShowRoleSelection] = useState(false);
+  const [showHomePage, setShowHomePage] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
