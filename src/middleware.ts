@@ -35,8 +35,8 @@ export default clerkMiddleware((auth, req) => {
   console.log("Middleware - Session claims:", sessionClaims);
 
   // Get role from private metadata
-  const role = (sessionClaims?.privateMetadata as { role?: string })?.role;
-  console.log("Middleware - User role from privateMetadata:", role);
+  const role = (sessionClaims?.unsafeMetadata as { role?: string })?.role;
+  console.log("Middleware - User role from unsafeMetadata:", role);
 
   // Check if user is accessing a dashboard route without authentication
   const isDashboardRoute = ['/admin', '/teacher', '/student', '/parent'].some(
