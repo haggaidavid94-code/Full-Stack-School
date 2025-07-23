@@ -36,11 +36,16 @@ const LoginPage = () => {
 
   // Show role selection if user is signed in but has no role
   if (showRoleSelection && isSignedIn) {
-    return <RoleSelection />;
+    return (
+      <ErrorBoundary>
+        <RoleSelection />
+      </ErrorBoundary>
+    );
   }
 
   return (
-    <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
+    <ErrorBoundary>
+      <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
       {!isSignUp ? (
         // SIGN IN FORM
         <SignIn.Root>
