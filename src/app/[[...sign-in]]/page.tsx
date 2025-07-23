@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import RoleSelection from "@/components/RoleSelection";
 
 const LoginPage = () => {
