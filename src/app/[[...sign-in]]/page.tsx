@@ -195,6 +195,7 @@ const LoginPage = () => {
         </SignUp.Root>
       )}
     </div>
+    </ErrorBoundary>
   );
 };
 
