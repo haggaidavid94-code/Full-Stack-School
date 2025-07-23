@@ -107,6 +107,20 @@ const RoleSelection = () => {
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500 mr-2"></div>
               Setting up your account...
             </div>
+            <p className="text-sm text-gray-500 mt-2">
+              This should only take a moment
+            </p>
+          </div>
+        )}
+
+        {!isLoading && (
+          <div className="text-center mt-6">
+            <button
+              onClick={() => window.location.href = '/admin'}
+              className="text-sm text-gray-500 hover:text-gray-700 underline"
+            >
+              Skip for now (go to Admin dashboard)
+            </button>
           </div>
         )}
       </div>
