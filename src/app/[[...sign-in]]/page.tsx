@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
-      const role = user?.publicMetadata.role;
+      const role = user?.publicMetadata.role || localStorage.getItem('userRole');
 
       if (role) {
         router.push(`/${role}`);
