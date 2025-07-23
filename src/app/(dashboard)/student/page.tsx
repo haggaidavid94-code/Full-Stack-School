@@ -14,7 +14,7 @@ const StudentPage = () => {
 
   useEffect(() => {
     if (isLoaded && user) {
-      const userRole = user.privateMetadata?.role;
+      const userRole = (user as any).privateMetadata?.role;
       
       console.log("StudentPage - User ID:", user.id);
       console.log("StudentPage - privateMetadata:", (user as any).privateMetadata);
