@@ -24,6 +24,12 @@ export default clerkMiddleware((auth, req) => {
     return NextResponse.next();
   }
 
+  // Allow access to continue page (post-verification)
+  if (req.nextUrl.pathname === '/continue') {
+    console.log("Middleware - Allowing access to continue page");
+    return NextResponse.next();
+  }
+
   // Allow access to debug and home pages
   if (req.nextUrl.pathname === '/debug' || req.nextUrl.pathname === '/home') {
     console.log("Middleware - Allowing access to debug/home page");
